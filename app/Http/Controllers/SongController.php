@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
+    public function landingPage()
+    {
+        return view('landingPage');
+    }
+
     public function index()
     {
         $songs = Songs::all();

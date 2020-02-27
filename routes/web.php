@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Landing Page
+Route::get('/landingPage', 'SongController@landingPage');
 // Showing all songs
 Route::get('/songs', 'SongController@index');
 // Creating new songs
