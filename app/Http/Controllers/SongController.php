@@ -10,7 +10,7 @@ class SongController extends Controller
     public function index()
     {
         $songs = Songs::all();
-        return $songs;
+        return view('songs.index', compact('songs'));
     }
 
     public function create()
@@ -26,9 +26,41 @@ class SongController extends Controller
         $song->link = $request->input('link');
         $song->title = $request->input('title');
         $song->author = $request->input('author');
+        $song->author_id = $request->input('author_id');
         $song->genre = $request->input('genre');
+        $song->genre_id = $request->input('genre_id');
         $song->description = $request->input('description');
         $song->save();
+
+        return redirect('/songs');
+    }
+
+    public function edit($id)
+    {
+        $song = Songs::findOrFail($id);
+        return view('songs.edit', compact('song'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $song = Songs::findOrFail($id);
+
+        $song->link = $request->input('link');
+        $song->title = $request->input('title');
+        $song->author = $request->input('author');
+        $song->author_id = $request->input('author_id');
+        $song->genre = $request->input('genre');
+        $song->genre_id = $request->input('genre_id');
+        $song->description = $request->input('description');
+        $song->save();
+        
+        return redirect('/songs');
+    }
+
+    public function delete($id)
+    {
+        $song = Songs::findOrFail($id);
+        $song->delete();
         return redirect('/songs');
     }
 }
